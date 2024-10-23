@@ -1,5 +1,7 @@
 import streamlit as st
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import locale
 from calc import *
 
 st.title("InvestCompare - Renda Fixa")
@@ -81,8 +83,7 @@ for i in range(periodo_meses):
     mapa_posfixado_lcilca.append(v)
 
 ## ======= PLOTANDO GRÁFICO =================================================================
-st.title("Gráfico")
-
+st.divider()    
 plt.clf()
 
 if 'Pré-fixado' in graficos_selecionados:
@@ -99,7 +100,13 @@ if 'Pós-fixado (LCI/LCA)' in graficos_selecionados:
 
 plt.xlabel('Meses')
 plt.ylabel('Valor Acumulado')
+plt.title('Valores LÍQUIDOS apresentados no ÚLTIMO período')
 plt.legend()
 plt.grid(True)
+plt.gcf().set_size_inches(10, 6)
+
+locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+formatter = ticker.FuncFormatter(lambda x, _: f'R${locale.currency(x, grouping=True, symbol=None)}')
+plt.gca().yaxis.set_major_formatter(formatter)
 
 st.pyplot(plt)
