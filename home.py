@@ -22,11 +22,11 @@ perc_cdi_lcilca_oferecido = col3.number_input('(LCI/LCA) % do CDI oferecido', va
 perc_prefixado_lcilca_oferecido = col3.number_input('(LCI/LCA) Pré-fixado oferecido (% a.a.)', value=10.5, step=0.1,
                                                     format="%.2f")
 
-periodo_meses = col3.selectbox('Período de 12 ou 24 meses?', [12, 24], index=1)
-
-graficos_selecionados = st.multiselect('Selecione os gráficos para exibição',
+colE1, colE2 = st.columns([8, 2])
+graficos_selecionados = colE1.multiselect('Selecione os gráficos para exibição',
                                        ['Pré-fixado', 'Pós-fixado', 'Pré-fixado (LCI/LCA)', 'Pós-fixado (LCI/LCA)'],
                                        ['Pré-fixado', 'Pós-fixado', 'Pré-fixado (LCI/LCA)', 'Pós-fixado (LCI/LCA)'])
+periodo_meses = colE2.selectbox('Período de 12 ou 24 meses?', [12, 24], index=1)
 
 # CALCULANDO -------------------------------------------------------------------------
 vlr_investido = 1_000.0
@@ -130,7 +130,7 @@ def visualizar_tabela_valores():
     st.dataframe(df, hide_index=True, use_container_width=True)
 
 
-if st.button('Visualizar Tabela de Valores', use_container_width=True, type='primary'):
+if colE2.button('Tabela de Valores', use_container_width=True, type='primary', icon=':material/table:'):
     visualizar_tabela_valores()
 
 st.html('<div style="text-align: right;">© 2024 InvestCompare</div>')
