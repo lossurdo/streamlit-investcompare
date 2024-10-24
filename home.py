@@ -132,5 +132,3 @@ def visualizar_tabela_valores():
 
 if colE2.button('Tabela de Valores', use_container_width=True, type='primary', icon=':material/table:'):
     visualizar_tabela_valores()
-
-st.html('<div style="text-align: right;">© 2024 InvestCompare</div>')

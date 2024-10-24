@@ -91,5 +91,5 @@ Isso significa que, ao usar nossos serviços, você pode navegar tranquilamente,
 de dados pessoais. Não pedimos nome, e-mail ou qualquer outra informação que possa identificá-lo.
 
 Estamos aqui para proporcionar uma experiência segura e agradável. Se você tiver alguma dúvida, fique à vontade para 
-entrar em contato com lossurdo.app [at] gmail.com.
+entrar em contato com lossurdo.app [at] gmail.com ou acesse https://github.com/lossurdo.
 """
