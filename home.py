@@ -1,7 +1,6 @@
-import locale
-
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
+import pandas as pd
 import streamlit as st
 
 from calc import *
@@ -108,8 +107,30 @@ plt.legend()
 plt.grid(True)
 plt.gcf().set_size_inches(10, 6)
 
-locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-formatter = ticker.FuncFormatter(lambda x, _: f'R${locale.currency(x, grouping=True, symbol=False)}')
+formatter = ticker.FuncFormatter(lambda x, _: f'R${x:,.2f}')
 plt.gca().yaxis.set_major_formatter(formatter)
 
 st.pyplot(plt)
+
+
+@st.dialog("Tabela de Valores", width='large')
+def visualizar_tabela_valores():
+    df = pd.DataFrame({
+        'Mês': [y + 1 for y in range(periodo_meses)],
+        'Pré-fixado': dados_prefixado,
+        'Pós-fixado': dados_posfixado,
+        'Pré-fixado (LCI/LCA)': dados_prefixado_lcilca,
+        'Pós-fixado (LCI/LCA)': dados_posfixado_lcilca
+    })
+    df['Pré-fixado'] = df['Pré-fixado'].apply(lambda x: f'R${x:,.2f}')
+    df['Pós-fixado'] = df['Pós-fixado'].apply(lambda x: f'R${x:,.2f}')
+    df['Pré-fixado (LCI/LCA)'] = df['Pré-fixado (LCI/LCA)'].apply(lambda x: f'R${x:,.2f}')
+    df['Pós-fixado (LCI/LCA)'] = df['Pós-fixado (LCI/LCA)'].apply(lambda x: f'R${x:,.2f}')
+    df = df.sort_values(by='Mês', ascending=False)
+    st.dataframe(df, hide_index=True, use_container_width=True)
+
+
+if st.button('Visualizar Tabela de Valores', use_container_width=True, type='primary'):
+    visualizar_tabela_valores()
+
+st.html('<div style="text-align: right;">© 2024 InvestCompare</div>')
