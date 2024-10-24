@@ -24,6 +24,7 @@ col2.number_input('CDI calculado', value=vlr_selic - 0.1, format="%.2f", disable
 
 btn_atualizar_selic = st.button('Atualizar a SELIC automaticamente',
                                 icon=":material/refresh:",
+                                type="primary",
                                 use_container_width=True)
 
 st.markdown("***Fonte:** [Banco Central](https://www.bcb.gov.br/controleinflacao/historicotaxasjuros)")
